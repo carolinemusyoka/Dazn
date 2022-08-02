@@ -12,6 +12,6 @@ import com.carolmusyoka.dazn.presentation.components.Title
 
 
 @Composable
-fun DetailScreen(){
+fun PlaybackScreen(){
 
 }
