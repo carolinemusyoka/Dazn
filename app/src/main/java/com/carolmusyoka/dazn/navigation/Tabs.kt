@@ -16,6 +16,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.carolmusyoka.dazn.presentation.screen.EventScreen
 import com.carolmusyoka.dazn.presentation.screen.HomeScreen
+import com.carolmusyoka.dazn.presentation.screen.ScheduledScreen
 
 enum class HomeTabs(
     val title: String,
@@ -30,10 +31,14 @@ enum class HomeTabs(
 fun NavGraphBuilder.addHomeGraph(
     navController: NavController,
     navToPlaybackScreen: () -> Unit,
+    navToEventScreen: () -> Unit,
+    navToScheduledScreen: () -> Unit,
     modifier: Modifier = Modifier
 ){
     composable(HomeTabs.HOME.route){
         HomeScreen(
+            navToEventScreen,
+            navToScheduledScreen,
             navController = navController,
             navToPlaybackScreen = navToPlaybackScreen,
             modifier = modifier
@@ -47,9 +52,8 @@ fun NavGraphBuilder.addHomeGraph(
         )
     }
     composable(HomeTabs.SCHEDULED.route){
-        EventScreen(
+        ScheduledScreen(
             navBack = { navController.navigateUp()},
-            navToPlaybackScreen = navToPlaybackScreen,
             modifier = modifier
         )
     }

@@ -12,6 +12,10 @@ import com.carolmusyoka.dazn.presentation.components.Title
 
 
 @Composable
-fun PlaybackScreen(){
+fun PlaybackScreen(
+    navBack:() -> Unit,
+    modifier: Modifier = Modifier,
+    eventId: String
+){
 
 }

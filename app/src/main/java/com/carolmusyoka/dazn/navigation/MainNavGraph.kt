@@ -39,6 +39,8 @@ fun MainNavGraph(
             addHomeGraph(
                 navController = navController,
                 navToPlaybackScreen = {},
+                navToEventScreen = {},
+                navToScheduledScreen = {},
                 modifier = modifier
             )
         }
