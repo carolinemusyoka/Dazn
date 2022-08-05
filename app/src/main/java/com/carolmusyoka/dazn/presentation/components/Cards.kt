@@ -28,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.carolmusyoka.dazn.domain.model.events.GetEventsResponseItem
@@ -41,7 +42,7 @@ import com.carolmusyoka.dazn.presentation.theme.titleTextColor
 @Composable
 fun EventCardItem(
     eventsResponseItem: GetEventsResponseItem,
-    navController: NavController,
+    navToEventsScreen: () -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -51,7 +52,7 @@ fun EventCardItem(
         shape = RoundedCornerShape(16.dp),
         elevation = 2.dp,
         onClick = {
-
+            navToEventsScreen()
         }
     ) {
         Column(
@@ -60,13 +61,6 @@ fun EventCardItem(
                 .wrapContentHeight()
                 .padding(12.dp)
         ) {
-            IconButton(onClick = {}) {
-                Icon(
-                    imageVector = Icons.Outlined.FavoriteBorder,
-                    contentDescription = "",
-                    tint = lightGrey
-                )
-            }
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -74,7 +68,7 @@ fun EventCardItem(
                     .clip(RoundedCornerShape(12.dp))
             ) {
                 Image(
-                    modifier = Modifier.height(100.dp),
+                    modifier = Modifier.height(150.dp),
                     contentScale = ContentScale.Inside,
                     // populate product image
                     painter = rememberImagePainter(eventsResponseItem.imageUrl),
@@ -93,7 +87,7 @@ fun EventCardItem(
                     text = eventsResponseItem.title,
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.Bold,
-                    fontSize = 12.sp,
+                    fontSize = 16.sp,
                     color = titleTextColor
                 )
                 Spacer(modifier = Modifier.height(2.5.dp))
@@ -102,36 +96,20 @@ fun EventCardItem(
                 Text(
                     text = eventsResponseItem.subtitle,
                     fontWeight = FontWeight.Medium,
-                    fontSize = 10.sp,
+                    textAlign = TextAlign.Center,
+                    fontSize = 12.sp,
                     color = blueDark,
                     modifier = Modifier.padding(bottom = 10.dp)
                 )
+                // event date and time
+                Text(
+                    text = eventsResponseItem.date,
+                    fontWeight = FontWeight.Medium,
+                    textAlign = TextAlign.Center,
+                    fontSize = 12.sp,
+                    modifier = Modifier.padding(bottom = 10.dp, top = 10.dp)
+                )
             }
-
-            // event date and time
-            Text(
-                text = buildAnnotatedString {
-                    withStyle(
-                        style = SpanStyle(
-                            blueDark,
-                            fontWeight = FontWeight.Bold,
-                        )
-                    ) {
-                        append("Happening:  ")
-                    }
-                    withStyle(
-                        style = SpanStyle(
-                            titleTextColor
-                        )
-                    ) {
-                        // propulate date and time
-                        append(eventsResponseItem.date.toString())
-                    }
-                },
-                style = MaterialTheme.typography.subtitle1,
-                modifier = Modifier,
-                fontSize = 12.sp,
-            )
         }
     }
 }
@@ -140,7 +118,7 @@ fun EventCardItem(
 @Composable
 fun ScheduledCardItem(
     scheduledEventsItem: GetScheduledEventsItem,
-    navController: NavController,
+    navToScheduledScreen: () -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -150,7 +128,7 @@ fun ScheduledCardItem(
         shape = RoundedCornerShape(16.dp),
         elevation = 2.dp,
         onClick = {
-
+            navToScheduledScreen()
         }
     ) {
         Column(
@@ -159,13 +137,6 @@ fun ScheduledCardItem(
                 .wrapContentHeight()
                 .padding(12.dp)
         ) {
-            IconButton(onClick = {}) {
-                Icon(
-                    imageVector = Icons.Outlined.FavoriteBorder,
-                    contentDescription = "",
-                    tint = lightGrey
-                )
-            }
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -173,7 +144,7 @@ fun ScheduledCardItem(
                     .clip(RoundedCornerShape(12.dp))
             ) {
                 Image(
-                    modifier = Modifier.height(100.dp),
+                    modifier = Modifier.height(150.dp),
                     contentScale = ContentScale.Inside,
                     // populate product image
                     painter = rememberImagePainter(scheduledEventsItem.imageUrl),
@@ -192,7 +163,7 @@ fun ScheduledCardItem(
                     text = scheduledEventsItem.title,
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.Bold,
-                    fontSize = 12.sp,
+                    fontSize = 16.sp,
                     color = titleTextColor
                 )
                 Spacer(modifier = Modifier.height(2.5.dp))
@@ -201,36 +172,20 @@ fun ScheduledCardItem(
                 Text(
                     text = scheduledEventsItem.subtitle,
                     fontWeight = FontWeight.Medium,
-                    fontSize = 10.sp,
+                    textAlign = TextAlign.Center,
+                    fontSize = 12.sp,
                     color = blueDark,
                     modifier = Modifier.padding(bottom = 10.dp)
                 )
+                // event date and time
+                Text(
+                    text = scheduledEventsItem.date,
+                    fontWeight = FontWeight.Medium,
+                    textAlign = TextAlign.Center,
+                    fontSize = 12.sp,
+                    modifier = Modifier.padding(bottom = 10.dp, top = 10.dp)
+                )
             }
-
-            // event date and time
-            Text(
-                text = buildAnnotatedString {
-                    withStyle(
-                        style = SpanStyle(
-                            blueDark,
-                            fontWeight = FontWeight.Bold,
-                        )
-                    ) {
-                        append("Happening:  ")
-                    }
-                    withStyle(
-                        style = SpanStyle(
-                            titleTextColor
-                        )
-                    ) {
-                        // propulate date and time
-                        append(scheduledEventsItem.date.toString())
-                    }
-                },
-                style = MaterialTheme.typography.subtitle1,
-                modifier = Modifier,
-                fontSize = 12.sp,
-            )
         }
     }
 }
@@ -277,6 +232,49 @@ fun ScheduledItem(
     }
 }
 
+@OptIn(ExperimentalCoilApi::class, ExperimentalMaterialApi::class)
+@Composable
+fun EventsItem(
+    eventsResponseItem: GetEventsResponseItem,
+    navToPlayback: () -> Unit,
+) {
+    Card(onClick = {navToPlayback()}) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Image(
+                painter = rememberImagePainter(eventsResponseItem.imageUrl),
+                contentDescription = null,
+                contentScale = ContentScale.Fit,
+                modifier = Modifier.size(width = 90.dp, height = 110.dp)
+            )
+            Spacer(modifier = Modifier.width(16.dp))
+            Column(verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                Text(text = eventsResponseItem.title, style = MaterialTheme.typography.button, fontSize = 18.sp)
+                CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
+                    Text(text = eventsResponseItem.subtitle, style = MaterialTheme.typography.body2, fontSize = 12.sp)
+                }
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        Icons.Rounded.Timer,
+                        contentDescription = null,
+                        tint = blueDark,
+                        modifier = Modifier.padding(end = 2.dp)
+                    )
+                    // time and date
+                    Text(
+                        text = "time and date",
+                        style = MaterialTheme.typography.body1,
+                        fontWeight = FontWeight.SemiBold,
+                        modifier = Modifier.padding(top = 2.dp)
+                    )
+                }
+            }
+        }
+    }
+}
+
 @Preview
 @Composable
 fun ScheduleItemPreview(){
@@ -290,3 +288,20 @@ fun ScheduleItemPreview(){
         )
     )
 }
+
+@Preview
+@Composable
+fun EventsItemPreview() {
+    EventCardItem(
+        eventsResponseItem = GetEventsResponseItem(
+            date = "2022-08-03T05:10:40.937Z",
+            id = "3",
+            imageUrl = "https://firebasestorage.googleapis.com/v0/b/dazn-recruitment/o/310511685198_image-header_pDach_1554872450000.jpeg?alt=media&token=5524d719-261e-49e6-abf3-a74c30df3e27",
+            subtitle = "UEFA Champions League",
+            title = "Man City v Tottenham",
+            videoUrl = "https://firebasestorage.googleapis.com/v0/b/dazn-recruitment/o/promo.mp4?alt=media"
+
+    ), navToEventsScreen = {})
+}
+
+

@@ -3,6 +3,7 @@ package com.carolmusyoka.dazn.navigation
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Event
+import androidx.compose.material.icons.rounded.EventAvailable
 import androidx.compose.material.icons.rounded.History
 import androidx.compose.material.icons.rounded.Home
 import androidx.compose.runtime.Composable
@@ -24,8 +25,8 @@ enum class HomeTabs(
     val route: String
 ){
     HOME("Home", Icons.Rounded.Home, "tabs/home"),
-    EVENTS("Events", Icons.Rounded.Event, "tabs/events"),
-    SCHEDULED("Schedule", Icons.Rounded.History, "tabs/scheduled"),
+    EVENTS("Events", Icons.Rounded.History, "tabs/events"),
+    SCHEDULED("Schedule", Icons.Rounded.Event, "tabs/scheduled"),
 }
 
 fun NavGraphBuilder.addHomeGraph(
@@ -37,10 +38,10 @@ fun NavGraphBuilder.addHomeGraph(
 ){
     composable(HomeTabs.HOME.route){
         HomeScreen(
-            navToEventScreen,
-            navToScheduledScreen,
+            navToEventsScreen = {navController.navigate(HomeTabs.EVENTS.route)},
+            navToScheduledScreen = {navController.navigate(HomeTabs.SCHEDULED.route)},
             navController = navController,
-            navToPlaybackScreen = navToPlaybackScreen,
+            navToPlaybackScreen = {  },
             modifier = modifier
         )
     }

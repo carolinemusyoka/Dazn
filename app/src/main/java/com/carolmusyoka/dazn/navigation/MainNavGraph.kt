@@ -20,7 +20,7 @@ sealed class MainDestinations(val route: String) {
 
 @Composable
 fun MainNavGraph(
-    modifier: Modifier = Modifier,
+    modifier: Modifier,
     navController: NavHostController = rememberNavController(),
     startDestinations: String = MainDestinations.HomeRoute.route,
 ){
@@ -39,8 +39,8 @@ fun MainNavGraph(
             addHomeGraph(
                 navController = navController,
                 navToPlaybackScreen = {},
-                navToEventScreen = {},
-                navToScheduledScreen = {},
+                navToEventScreen = {HomeTabs.EVENTS.route},
+                navToScheduledScreen = { HomeTabs.SCHEDULED.route },
                 modifier = modifier
             )
         }

@@ -70,11 +70,11 @@ fun HomeScreen(
             HomeTitle()
             Spacer(modifier = Modifier.height(24.dp))
 
-            EventsHorizontalList(events, navController)
+            EventsHorizontalList(events, navToEventsScreen)
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            ScheduledHorizontalList(scheduled, navController)
+            ScheduledHorizontalList(scheduled, navToScheduledScreen)
 
             Spacer(modifier = Modifier.height(24.dp))
         }
@@ -115,7 +115,7 @@ fun HomeTitle() {
 }
 
 @Composable
-fun ScheduledHorizontalList(scheduled: State<ScheduledUiState>, navController: NavController) {
+fun ScheduledHorizontalList(scheduled: State<ScheduledUiState>, navToScheduledScreen: () -> Unit) {
     Column{
         // Row of title and show more button(transparent button)
         Row(
@@ -132,7 +132,7 @@ fun ScheduledHorizontalList(scheduled: State<ScheduledUiState>, navController: N
                     .padding(top = 6.dp)
             )
             OutlinedButton(
-                onClick = { /*TODO*/ },
+                onClick = { navToScheduledScreen() },
                 Modifier
                     .background(color = Color.Transparent),
             ) {
@@ -140,7 +140,7 @@ fun ScheduledHorizontalList(scheduled: State<ScheduledUiState>, navController: N
                 Text(text = "View all", color = Color.DarkGray)
             }
         }
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(15.dp))
 
         // Row of scheduled events
         LazyRow{
@@ -152,7 +152,7 @@ fun ScheduledHorizontalList(scheduled: State<ScheduledUiState>, navController: N
                     items(scheduled.value.data!!.size){ event ->
                         scheduled.value.data?.get(event)?.let {
                             ScheduledCardItem(it,
-                                navController = navController
+                                navToScheduledScreen = navToScheduledScreen
                             )
                         }
                     }
@@ -167,7 +167,7 @@ fun ScheduledHorizontalList(scheduled: State<ScheduledUiState>, navController: N
 }
 
 @Composable
-fun EventsHorizontalList(events: State<EventUiState>, navController: NavController) {
+fun EventsHorizontalList(events: State<EventUiState>, navToEventsScreen: () -> Unit) {
     Column{
         // Row of title and show more button(transparent button)
         Row(
@@ -184,7 +184,7 @@ fun EventsHorizontalList(events: State<EventUiState>, navController: NavControll
                     .padding(top = 6.dp)
             )
             OutlinedButton(
-                onClick = { /*TODO*/ },
+                onClick = { navToEventsScreen() },
                 Modifier
                     .background(color = Color.Transparent),
             ) {
@@ -192,7 +192,7 @@ fun EventsHorizontalList(events: State<EventUiState>, navController: NavControll
                 Text(text = "View all", color = Color.DarkGray)
             }
         }
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(15.dp))
 
         // Row of events
         LazyRow{
@@ -204,7 +204,7 @@ fun EventsHorizontalList(events: State<EventUiState>, navController: NavControll
                     items(events.value.data!!.size){ event ->
                         events.value.data?.get(event)?.let {
                             EventCardItem(eventsResponseItem = it,
-                                navController = navController
+                                navToEventsScreen = navToEventsScreen
                             )
                         }
                     }

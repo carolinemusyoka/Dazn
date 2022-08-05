@@ -1,5 +1,6 @@
 package com.carolmusyoka.dazn.navigation
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
@@ -16,10 +17,12 @@ fun MainDaznApp() {
         Scaffold(
             bottomBar = { DaznBottomBar(tabs = tabs, navController = navController) }
         ) { innerPadding ->
-            MainNavGraph(
-                navController = navController,
-                modifier = Modifier.padding(innerPadding)
-            )
+            Box(modifier = Modifier.padding(innerPadding)) {
+                MainNavGraph(
+                    navController = navController,
+                    modifier = Modifier.padding(innerPadding)
+                )
+            }
         }
     }
 }
