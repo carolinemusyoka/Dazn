@@ -239,9 +239,11 @@ fun ScheduledItem(
 @Composable
 fun EventsItem(
     eventsResponseItem: GetEventsResponseItem,
-    navToPlayback: () -> Unit,
+    navController: NavController
 ) {
-    Card(onClick = {navToPlayback()}) {
+    Card(onClick = {
+        navController.navigate(MainDestinations.EventDetail.createRoute(eventsResponseItem.id))
+    }) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxWidth()

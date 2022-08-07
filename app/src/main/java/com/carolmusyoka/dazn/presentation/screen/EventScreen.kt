@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.carolmusyoka.dazn.presentation.components.EventsItem
 import com.carolmusyoka.dazn.presentation.components.Menu
 import com.carolmusyoka.dazn.presentation.viewmodel.EventViewModel
@@ -21,7 +22,9 @@ fun EventScreen(
     navBack:() -> Unit,
     navToPlaybackScreen:() -> Unit,
     modifier: Modifier = Modifier,
-    eventsViewModel: EventViewModel = hiltViewModel()
+    eventsViewModel: EventViewModel = hiltViewModel(),
+    navController: NavController
+
 ) {
     val scrollState = rememberScrollState()
     val events = remember {
@@ -48,7 +51,7 @@ fun EventScreen(
                         events.value.data != null -> {
                             items(events.value.data!!.size) { event ->
                                 events.value.data?.get(event)?.let {
-                                    EventsItem(it, navToPlaybackScreen)
+                                    EventsItem(it, navController = navController)
                                 }
                             }
                         }

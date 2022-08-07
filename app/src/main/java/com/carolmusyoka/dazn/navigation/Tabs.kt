@@ -49,7 +49,8 @@ fun NavGraphBuilder.addHomeGraph(
         EventScreen(
             navBack = { navController.navigateUp()},
             navToPlaybackScreen = navToPlaybackScreen,
-            modifier = modifier
+            modifier = modifier,
+            navController = navController
         )
     }
     composable(HomeTabs.SCHEDULED.route){
