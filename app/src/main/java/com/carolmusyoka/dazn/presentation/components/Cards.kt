@@ -35,14 +35,16 @@ import com.carolmusyoka.dazn.domain.model.events.GetEventsResponseItem
 import com.carolmusyoka.dazn.presentation.theme.lightGrey
 import com.carolmusyoka.dazn.R
 import com.carolmusyoka.dazn.domain.model.scheduled.GetScheduledEventsItem
+import com.carolmusyoka.dazn.navigation.MainDestinations
 import com.carolmusyoka.dazn.presentation.theme.blueDark
 import com.carolmusyoka.dazn.presentation.theme.titleTextColor
+import com.google.gson.Gson
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalCoilApi::class)
 @Composable
 fun EventCardItem(
     eventsResponseItem: GetEventsResponseItem,
-    navToEventsScreen: () -> Unit
+    navController: NavController
 ) {
     Card(
         modifier = Modifier
@@ -52,7 +54,8 @@ fun EventCardItem(
         shape = RoundedCornerShape(16.dp),
         elevation = 2.dp,
         onClick = {
-            navToEventsScreen()
+
+            navController.navigate(MainDestinations.EventDetail.createRoute(eventsResponseItem.id))
         }
     ) {
         Column(
@@ -301,7 +304,7 @@ fun EventsItemPreview() {
             title = "Man City v Tottenham",
             videoUrl = "https://firebasestorage.googleapis.com/v0/b/dazn-recruitment/o/promo.mp4?alt=media"
 
-    ), navToEventsScreen = {})
+    ), navController = rememberNavController())
 }
 
 

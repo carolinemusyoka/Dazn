@@ -70,7 +70,7 @@ fun HomeScreen(
             HomeTitle()
             Spacer(modifier = Modifier.height(24.dp))
 
-            EventsHorizontalList(events, navToEventsScreen)
+            EventsHorizontalList(events, navToEventsScreen, navController)
 
             Spacer(modifier = Modifier.height(24.dp))
 
@@ -167,7 +167,7 @@ fun ScheduledHorizontalList(scheduled: State<ScheduledUiState>, navToScheduledSc
 }
 
 @Composable
-fun EventsHorizontalList(events: State<EventUiState>, navToEventsScreen: () -> Unit) {
+fun EventsHorizontalList(events: State<EventUiState>, navToEventsScreen: () -> Unit, navController: NavController) {
     Column{
         // Row of title and show more button(transparent button)
         Row(
@@ -204,7 +204,7 @@ fun EventsHorizontalList(events: State<EventUiState>, navToEventsScreen: () -> U
                     items(events.value.data!!.size){ event ->
                         events.value.data?.get(event)?.let {
                             EventCardItem(eventsResponseItem = it,
-                                navToEventsScreen = navToEventsScreen
+                                navController = navController,
                             )
                         }
                     }

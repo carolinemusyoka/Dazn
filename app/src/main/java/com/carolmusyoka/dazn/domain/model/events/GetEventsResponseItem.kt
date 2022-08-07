@@ -1,5 +1,6 @@
 package com.carolmusyoka.dazn.domain.model.events
 
+
 data class GetEventsResponseItem(
     val date: String,
     val id: String,

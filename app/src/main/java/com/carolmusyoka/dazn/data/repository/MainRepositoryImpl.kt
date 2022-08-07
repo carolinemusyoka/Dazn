@@ -1,6 +1,6 @@
 package com.carolmusyoka.dazn.data.repository
 
-import com.carolmusyoka.dazn.data.ApiService
+import com.carolmusyoka.dazn.data.api.ApiService
 import com.carolmusyoka.dazn.domain.model.NetworkResult
 import com.carolmusyoka.dazn.domain.model.events.GetEventsResponse
 import com.carolmusyoka.dazn.domain.model.scheduled.GetScheduledEventsResponse

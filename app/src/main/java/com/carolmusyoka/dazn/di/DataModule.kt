@@ -2,7 +2,7 @@ package com.carolmusyoka.dazn.di
 
 import android.app.Application
 import com.carolmusyoka.dazn.BuildConfig
-import com.carolmusyoka.dazn.data.ApiService
+import com.carolmusyoka.dazn.data.api.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
