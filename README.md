@@ -6,7 +6,10 @@ An app using Compose and Hilt on MAD stacks and architecture to consume Dazn api
 
 You can build the project with Android Studio or [download the apk directly](https://github.com/carolinemusyoka/Dazn/blob/master/app/releases/app-debug.apk) from releases.
 
-## Screenshots
+## Screenshots and recordings
+
+<img src="https://user-images.githubusercontent.com/44951692/183297595-d0a5e77c-21c6-48ea-ab7b-6c08bda421a2.jpg" width=30% height=30%> <img src="https://user-images.githubusercontent.com/44951692/183297600-56e0997b-a3d9-4496-862d-c462495b676b.jpg" width=30% height=30%> <img src="https://user-images.githubusercontent.com/44951692/183297605-87374485-e117-41d0-bde4-f23696275097.jpg" width=30% height=30%>  <img src="https://user-images.githubusercontent.com/44951692/183297591-b7f7eca4-838e-4584-aea2-24ebd260ef26.jpg" width=30% height=30%>
+
 
 ## Built with
 
