@@ -66,7 +66,7 @@ fun MainNavGraph(
             }.collectAsState()
             when{
                 events.value.data != null ->{
-                    val data = events.value.data!![eventId.toInt()]
+                    val data = events.value.data!![eventId.toInt() -1]
                     Log.d("TAG", "MainNavGraph: data: $data")
                     PlaybackScreen(
                         navBack = { navController.navigateUp() },
