@@ -33,9 +33,6 @@ fun MainNavGraph(
     startDestinations: String = MainDestinations.HomeRoute.route,
     eventsViewModel: EventViewModel = hiltViewModel()
 ){
-    val actions = remember {
-        MainActions(navController)
-    }
 
     NavHost(
         navController = navController,
@@ -76,10 +73,5 @@ fun MainNavGraph(
                 }
             }
         }
-    }
-}
-class MainActions(navController: NavHostController) {
-    val navigateToPlayback = { eventId: String ->
-        navController.navigate(route = "${MainDestinations.EventDetail}/$eventId")
     }
 }
