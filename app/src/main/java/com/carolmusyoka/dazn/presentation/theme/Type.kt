@@ -1,4 +1,4 @@
-package com.carolmusyoka.dazn.ui.theme
+package com.carolmusyoka.dazn.presentation.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
